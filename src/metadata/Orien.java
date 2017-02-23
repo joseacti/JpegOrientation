@@ -16,6 +16,7 @@ import com.drew.metadata.jpeg.JpegDirectory;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Arrays;
 
 public class Orien {
@@ -28,13 +29,13 @@ public class Orien {
     public static void main(String[] args)
     {
     	try{
-            File file = new File("/Users/jose/Desktop/Exif/Landscape_3.jpg");
+            File file = new File(System.getProperty("user.dir")+"/testImages/Landscape_3.jpg");
             Metadata metadata = ImageMetadataReader.readMetadata(file);
-            print(metadata);
-//            Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-//            JpegDirectory jpegDirectory = metadata.getFirstDirectoryOfType(JpegDirectory.class);
-//            int orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
-//            System.out.println("Orientation : "+orientation);
+//            print(metadata);
+            Directory directory = metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+            JpegDirectory jpegDirectory = metadata.getFirstDirectoryOfType(JpegDirectory.class);
+            int orientation = directory.getInt(ExifIFD0Directory.TAG_ORIENTATION);
+            System.out.println("Orientation : "+orientation);
     	}catch(Exception e){
     		System.out.println("Exception : "+e.getMessage());
     	}
@@ -66,7 +67,7 @@ public class Orien {
             //
             if (directory.hasErrors()) {
                 for (String error : directory.getErrors()) {
-                    System.err.println("ERROR: " + error);
+              System.err.println("ERROR: " + error);
                 }
             }
         }
